@@ -5,14 +5,8 @@ enum Env { development, staging, production }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await loadEnvironment(Env.staging.name);
+  await dotenv.load(fileName: '.env.${Env.production.name}');
   runApp(const MyApp());
-}
-
-Future<void> loadEnvironment(String environment) async {
-  String fileName = '.env';
-  fileName += '.$environment';
-  await dotenv.load(fileName: fileName);
 }
 
 class MyApp extends StatelessWidget {
